@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Recognition</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+
+    <div class="container-fluid text-center title">
+        <h1>Полигон</h1>
+    </div>
+
+    <div class="container-fluid text-center">
+        <div class="row">
+            {% for result in results %}
+            <div class="col-6 left-side">
+                <h2>Изображение</h2>
+                <img src="{{ result['image_path'] }}" alt="" width="300" height="150">
+            </div>
+    
+            <div class="col-6 right-side">
+                <h2 class="text center result">Распознанный текст</h2>
+                <h3 class="text center result">{{ result['recognized_text'] }}</h3>
+                <hr>
+                <p class="text center result {% if result['rate'] %} true {% else %} false {% endif %}">
+                    {% if result['rate'] %}
+                        Распознано
+                    {% else %}
+                        Не распознано
+                    {% endif %}
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>
